@@ -4,7 +4,7 @@ let vm = new Vue({
         taiwanCountry: []
     },
     mounted() {
-        fetch('https://raw.githubusercontent.com/scientia-potentia-est-tw/Hospital-Bed-Dashboard/main/COUNTY_MOI_1090820.json?token=0f8c880cf2fae681ad4d7b805ebfb156f44244a6').then(res => res.json()).then(result => {
+        fetch('https://raw.githubusercontent.com/scientia-potentia-est-tw/Taiwan-Hospital-Bed-Analysis/gh-pages/COUNTY_MOI_1090820.json?token=0f8c880cf2fae681ad4d7b805ebfb156f44244a6').then(res => res.json()).then(result => {
             this.taiwanCountry = result
             this.draw(this.taiwanCountry)
         })
