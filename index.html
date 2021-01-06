@@ -1,33 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
+    <!-- RWD -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- D3.js minified version-->
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <!-- topojson encoding -->
+    <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <!-- topo json -->
     <script src="https://unpkg.com/topojson@3"></script>
+    <script src="//d3js.org/topojson.v1.min.js"></script>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
     <!-- vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <!-- bootstrap for Vue, it using Jquery -->
+    <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <!-- css file -->
     <link rel="stylesheet" href="./index.css">
+    <!-- hospital bed json -->
+    <script type="text/javascript" src="data.json"></script>
 </head>
 
 <body>
+    
     <!-- Main Page Image -->
-    <!-- <div class="container"> -->
-    <!-- <img src="bedMeme.png" class="img"> -->
-    <!-- </div> -->
-    <!-- map -->
-    <div id="app">
-        <svg width='500' height='500' style="border: 1px solid black;">
-            <g class="counties"></g>
-            <path class="county-borders"></path>
-        </svg>
-    </div>
+    <!-- nav bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">病床戰情室</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">DashBoard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Navigation</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- taiwan map -->
+      <div id="mouseInf"></div>
+      <svg width="1000px" height="800px" style='border:1px solid #00000060;'>
+      </svg>
+      <!-- load rate -->
+      <div class="d-inline-block bg-warning">
+      <h3>全台隔離病床負載率</h3>
+      <div id="allBedLoadRate"></div>
+      </div>
+      <div id="selectRegionBedLoadRate" class="d-inline-block bg-warning">
+      <h3 id="selectRegionName"></h3>
+      </div>
     <!-- js file -->
     <script src="./index.js"></script>
 </body>
