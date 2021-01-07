@@ -23,14 +23,11 @@
     <!-- hospital bed json -->
     <script type="text/javascript" src="./data.json"></script>
 </head>
-
 <body>
-    
-    <!-- Main Page Image -->
-    <!-- nav bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">病床戰情室</a>
+          <a class="navbar-brand" href="index.html">病床戰情室</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -49,22 +46,4 @@
           </div>
         </div>
       </nav>
-      <!-- taiwan map -->
-      <div id="mouseInf"></div>
-      <svg width="1000px" height="800px" style='border:1px solid #00000060;'>
-      </svg>
-      <!-- load rate -->
-      <div class="d-inline-block bg-warning">
-        <h3>全台隔離病床負載率</h3>
-          <div id="allBedLoadRate"></div>
-      </div>
-      <div  class="d-inline-block bg-warning">
-        <h3 id="selectRegionName">地區名稱</h3>
-        <div id="selectRegionBedLoadRate">地區隔離病床負載率</div>
-      </div>
-      
-    <!-- js file -->
-    <script src="./index.js"></script>
 </body>
-
-</html>
