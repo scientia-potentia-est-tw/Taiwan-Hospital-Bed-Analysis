@@ -167,7 +167,7 @@
 			$("#allBedLoadRate").html(taiwanAllHospitalBedLoadRate);
 			// console.log("Taipei usage bed:"+countyHospitalBedUsage."臺北市");
 			})
-		countyMap();
+		
 		
 		
         /* 縮放、滑動 */
@@ -267,4 +267,5 @@
 				});
 				
 		}
+		countyMap();
 		
