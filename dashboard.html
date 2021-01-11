@@ -6,7 +6,6 @@
     <!-- RWD -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- D3.js minified version-->
-    <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <!-- topo json -->
     <!-- <script src="https://unpkg.com/topojson@3"></script> -->
@@ -19,7 +18,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <!-- css file -->
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./dashboard.css">
     <!-- hospital bed json -->
     <script type="text/javascript" src="./data.json"></script>
 </head>
@@ -39,11 +38,57 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="dashboard.html">DashBoard</a>
               </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="navigation.html">Navigation</a>
+              </li> -->
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="dashboard.html">Slide</a>
+                <a class="nav-link active" target="_blank" aria-current="page" href="https://docs.google.com/presentation/d/1HU5-hPXFpvZGRNTDEtvoqylUQLx7wODrtadPI1nvmqM/edit?usp=sharing">Slide</a>
               </li>
             </ul>
           </div>
         </div>
-      </nav>
+</nav>
+<div class="container">
+  <div class="row">
+    <div class="col-xl">
+    <form>
+      <div class="form-group">
+        <label for="countyCitySelect">Select county or city</label>
+        <select multiple class="form-control mw-100" id="countyCitySelect">
+        <option value="臺北市">臺北市</option>
+        <option value="基隆市">基隆市</option>
+        <option value="新北市">新北市</option>  
+        <option value="新竹市">新竹市</option>
+        <option value="新竹縣">新竹縣</option>
+        <option value="桃園市">桃園市</option>
+        <option value="苗栗縣">苗栗縣</option>
+        <option value="臺中市">臺中市</option>
+        <option value="彰化縣">彰化縣</option>
+        <option value="南投縣">南投縣</option>
+        <option value="雲林縣">雲林縣</option>
+        <option value="嘉義市">嘉義市</option>
+        <option value="嘉義縣">嘉義縣</option>
+        <option value="臺南市">臺南市</option>
+        <option value="高雄市">高雄市</option>
+        <option value="屏東縣">屏東縣</option>
+        <option value="宜蘭縣">宜蘭縣</option>
+        <option value="台東縣">台東縣</option>
+        <option value="花蓮縣">花蓮縣</option>
+        <option value="金門縣">金門縣</option>
+        <option value="連江縣">連江縣</option>
+        <option value="澎湖縣">澎湖縣</option>
+        </select>
+    </div>
+  </form>
+</div>
+<div class="col-xl" id="barchart">
+</div>
+</div>
+</div>
+<div id="hospitalInfo">
+  
+</div>
+
+<script src="./dashboard.js"></script>
 </body>
+</html>
