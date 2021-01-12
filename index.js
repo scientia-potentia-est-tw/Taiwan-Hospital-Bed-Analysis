@@ -189,8 +189,10 @@
         			}
         		}
         		//count each county and city hospital bed load rate
-        		countyHospitalBedLoadRate.連江縣 = Math.round((countyHospitalBedUsage.連江縣 * 100) / countyHospitalBed.連江縣);
-        		countyHospitalBedLoadRate.金門縣 = Math.round((countyHospitalBedUsage.金門縣 * 100) / countyHospitalBed.金門縣);
+        		// countyHospitalBedLoadRate.連江縣 = Math.round((countyHospitalBedUsage.連江縣 * 100) / countyHospitalBed.連江縣);
+        		countyHospitalBedLoadRate.連江縣 = 0;
+        		// countyHospitalBedLoadRate.金門縣 = Math.round((countyHospitalBedUsage.金門縣 * 100) / countyHospitalBed.金門縣);
+        		countyHospitalBedLoadRate.金門縣 = 0;
         		countyHospitalBedLoadRate.宜蘭縣 = Math.round((countyHospitalBedUsage.宜蘭縣 * 100) / countyHospitalBed.宜蘭縣);
         		countyHospitalBedLoadRate.彰化縣 = Math.round((countyHospitalBedUsage.彰化縣 * 100) / countyHospitalBed.彰化縣);
         		// countyHospitalBedLoadRate.南投縣 = Math.round((countyHospitalBedUsage.南投縣 * 100) / countyHospitalBed.南投縣);
@@ -199,7 +201,8 @@
         		countyHospitalBedLoadRate.屏東縣 = Math.round((countyHospitalBedUsage.屏東縣 * 100) / countyHospitalBed.屏東縣);
         		countyHospitalBedLoadRate.臺東縣 = Math.round((countyHospitalBedUsage.臺東縣 * 100) / countyHospitalBed.臺東縣);
         		countyHospitalBedLoadRate.花蓮縣 = Math.round((countyHospitalBedUsage.花蓮縣 * 100) / countyHospitalBed.花蓮縣);
-        		countyHospitalBedLoadRate.澎湖縣 = Math.round((countyHospitalBedUsage.澎湖縣 * 100) / countyHospitalBed.澎湖縣);
+        		// countyHospitalBedLoadRate.澎湖縣 = Math.round((countyHospitalBedUsage.澎湖縣 * 100) / countyHospitalBed.澎湖縣);
+        		countyHospitalBedLoadRate.澎湖縣 = 0;
         		// countyHospitalBedLoadRate.基隆市 = Math.round((countyHospitalBedUsage.基隆市 * 100) / countyHospitalBed.基隆市);
         		countyHospitalBedLoadRate.基隆市 = 0;
         		countyHospitalBedLoadRate.新竹市 = Math.round((countyHospitalBedUsage.新竹市 * 100) / countyHospitalBed.新竹市);
@@ -240,30 +243,31 @@
         		$("#allBedLoadRate").html(taiwanAllHospitalBedLoadRate);
         		// console.log("Taipei usage bed:"+countyHospitalBedUsage."臺北市");
         		// console.log(countyHospitalBedLoadRate.臺北市);
-        	})
+        	});
         }
 
+        function countyMap() {
 
-        /* 縮放、滑動 */
-        /* 
+        	/* 縮放、滑動 */
+        	/* 
 	        利用D3.js設計的Zoom Behavior，實現滑鼠滾輪滾動可地圖放大縮小效果，先宣告zoom行為，接著用call來呼叫zoom的行為。
 	        d3.behavior.zoom(): 宣告，這裡使用了幾個參數
 			translate: 移動距離
 			scaleExtent: 縮放最大值與最小值
 			scale: 縮放大小比例
 		*/
-        var zoom = d3.behavior.zoom()
-        	.translate([0, 0])
-        	.scaleExtent([1, 10])
-        	.scale(1)
-        	.on("zoom", zoomed);
+        	var zoom = d3.behavior.zoom()
+        		.translate([0, 0])
+        		.scaleExtent([1, 10])
+        		.scale(1)
+        		.on("zoom", zoomed);
 
-        function zoomed() {
-        	d3.select("svg").selectAll("path").attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
-        	d3.select("svg").selectAll("image").attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
-        }
+        	function zoomed() {
+        		d3.select("svg").selectAll("path").attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
+        		d3.select("svg").selectAll("image").attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
+        	}
 
-        function countyMap() {
+
         	/* 放置你的TopoJSON路徑 */
         	d3.json("https://raw.githubusercontent.com/scientia-potentia-est-tw/Taiwan-Hospital-Bed-Analysis/gh-pages/taiwan.json?token=260db515f58344832d1331a19e4b01b82ec50cdc", function (error, map) {
         		if (error) return console.error(error);
@@ -372,7 +376,6 @@
         	readJsonFile();
         	setTimeout(function () {}, 1000);
         	countyMap();
-
         }
 
         window.addEventListener("load", start, false);
