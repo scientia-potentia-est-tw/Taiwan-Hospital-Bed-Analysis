@@ -193,23 +193,27 @@
         		countyHospitalBedLoadRate.金門縣 = Math.round((countyHospitalBedUsage.金門縣 * 100) / countyHospitalBed.金門縣);
         		countyHospitalBedLoadRate.宜蘭縣 = Math.round((countyHospitalBedUsage.宜蘭縣 * 100) / countyHospitalBed.宜蘭縣);
         		countyHospitalBedLoadRate.彰化縣 = Math.round((countyHospitalBedUsage.彰化縣 * 100) / countyHospitalBed.彰化縣);
-        		countyHospitalBedLoadRate.南投縣 = Math.round((countyHospitalBedUsage.南投縣 * 100) / countyHospitalBed.南投縣);
+        		// countyHospitalBedLoadRate.南投縣 = Math.round((countyHospitalBedUsage.南投縣 * 100) / countyHospitalBed.南投縣);
+        		countyHospitalBedLoadRate.南投縣 = 0;
         		countyHospitalBedLoadRate.雲林縣 = Math.round((countyHospitalBedUsage.雲林縣 * 100) / countyHospitalBed.雲林縣);
         		countyHospitalBedLoadRate.屏東縣 = Math.round((countyHospitalBedUsage.屏東縣 * 100) / countyHospitalBed.屏東縣);
         		countyHospitalBedLoadRate.臺東縣 = Math.round((countyHospitalBedUsage.臺東縣 * 100) / countyHospitalBed.臺東縣);
         		countyHospitalBedLoadRate.花蓮縣 = Math.round((countyHospitalBedUsage.花蓮縣 * 100) / countyHospitalBed.花蓮縣);
         		countyHospitalBedLoadRate.澎湖縣 = Math.round((countyHospitalBedUsage.澎湖縣 * 100) / countyHospitalBed.澎湖縣);
-        		countyHospitalBedLoadRate.基隆市 = Math.round((countyHospitalBedUsage.基隆市 * 100) / countyHospitalBed.基隆市);
+        		// countyHospitalBedLoadRate.基隆市 = Math.round((countyHospitalBedUsage.基隆市 * 100) / countyHospitalBed.基隆市);
+        		countyHospitalBedLoadRate.基隆市 = 0;
         		countyHospitalBedLoadRate.新竹市 = Math.round((countyHospitalBedUsage.新竹市 * 100) / countyHospitalBed.新竹市);
         		countyHospitalBedLoadRate.臺北市 = Math.round((countyHospitalBedUsage.臺北市 * 100) / countyHospitalBed.臺北市);
         		countyHospitalBedLoadRate.新北市 = Math.round((countyHospitalBedUsage.新北市 * 100) / countyHospitalBed.新北市);
         		countyHospitalBedLoadRate.臺中市 = Math.round((countyHospitalBedUsage.臺中市 * 100) / countyHospitalBed.臺中市);
         		countyHospitalBedLoadRate.臺南市 = Math.round((countyHospitalBedUsage.臺南市 * 100) / countyHospitalBed.臺南市);
         		countyHospitalBedLoadRate.桃園市 = Math.round((countyHospitalBedUsage.桃園市 * 100) / countyHospitalBed.桃園市);
-        		countyHospitalBedLoadRate.苗栗縣 = Math.round((countyHospitalBedUsage.苗栗縣 * 100) / countyHospitalBed.苗栗縣);
+        		// countyHospitalBedLoadRate.苗栗縣 = Math.round((countyHospitalBedUsage.苗栗縣 * 100) / countyHospitalBed.苗栗縣);
+        		countyHospitalBedLoadRate.苗栗縣 = 0;
         		countyHospitalBedLoadRate.新竹縣 = Math.round((countyHospitalBedUsage.新竹縣 * 100) / countyHospitalBed.新竹縣);
         		countyHospitalBedLoadRate.嘉義市 = Math.round((countyHospitalBedUsage.嘉義市 * 100) / countyHospitalBed.嘉義市);
-        		countyHospitalBedLoadRate.嘉義縣 = Math.round((countyHospitalBedUsage.嘉義縣 * 100) / countyHospitalBed.嘉義縣);
+        		// countyHospitalBedLoadRate.嘉義縣 = Math.round((countyHospitalBedUsage.嘉義縣 * 100) / countyHospitalBed.嘉義縣);
+        		countyHospitalBedLoadRate.嘉義縣 = 0;
         		countyHospitalBedLoadRate.高雄市 = Math.round((countyHospitalBedUsage.高雄市 * 100) / countyHospitalBed.高雄市);
         		// console.log(countyHospitalBedUsage."臺北市");
         		var taiwanAllHospitalBedAmount = 0;
@@ -235,7 +239,7 @@
         		var taiwanAllHospitalBedLoadRate = Math.round((taiwanAllHospitalBedUsage * 100) / taiwanAllHospitalBedAmount) + "%";
         		$("#allBedLoadRate").html(taiwanAllHospitalBedLoadRate);
         		// console.log("Taipei usage bed:"+countyHospitalBedUsage."臺北市");
-
+        		// console.log(countyHospitalBedLoadRate.臺北市);
         	})
         }
 
@@ -366,7 +370,9 @@
 
         function start() {
         	readJsonFile();
+        	setTimeout(function () {}, 1000);
         	countyMap();
+
         }
 
         window.addEventListener("load", start, false);
