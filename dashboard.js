@@ -43,7 +43,11 @@ function readJsonFile() {
             // sconsole.log(HospitalBedData[item].hosp);
             switch (HospitalBedData[item].city) {
                 case "連江縣":
-                    hospitalLoadRate = Math.round((HospitalBedData[item].info["占床數"] * 100) / HospitalBedData[item].info["總數"]);
+                    if (HospitalBedData[item].info["總數"] == 0) {
+                        hospitalLoadRate = 0;
+                    } else {
+                        hospitalLoadRate = Math.round((HospitalBedData[item].info["占床數"] * 100) / HospitalBedData[item].info["總數"]);
+                    }
                     var element = {};
                     element.hosp = HospitalBedData[item].hosp;
                     element.value = hospitalLoadRate;
@@ -127,7 +131,11 @@ function readJsonFile() {
                     HsinchuCityAllHospital.push(element);
                     break;
                 case "台北市":
-                    hospitalLoadRate = Math.round((HospitalBedData[item].info["占床數"] * 100) / HospitalBedData[item].info["總數"]);
+                    if (HospitalBedData[item].info["總數"] == 0) {
+                        hospitalLoadRate = 0;
+                    } else {
+                        hospitalLoadRate = Math.round((HospitalBedData[item].info["占床數"] * 100) / HospitalBedData[item].info["總數"]);
+                    }
                     var element = {};
                     element.hosp = HospitalBedData[item].hosp;
                     element.value = hospitalLoadRate;
@@ -212,43 +220,44 @@ function readJsonFile() {
 }
 
 // console.log(TaipeiCityAllHospital);
-function barchart() {
-    var data = [{
-            "name": "Apples",
-            "value": 20,
-        },
-        {
-            "name": "Bananas",
-            "value": 12,
-        },
-        {
-            "name": "Grapes",
-            "value": 19,
-        },
-        {
-            "name": "Lemons",
-            "value": 5,
-        },
-        {
-            "name": "Limes",
-            "value": 16,
-        },
-        {
-            "name": "Oranges",
-            "value": 26,
-        },
-        {
-            "name": "Pears",
-            "value": 30,
-        }
-    ];
+function barchart(data) {
+    $("#barchart").html("");
+    // var data = [{
+    //         "name": "Apples",
+    //         "value": 20,
+    //     },
+    //     {
+    //         "name": "Bananas",
+    //         "value": 12,
+    //     },
+    //     {
+    //         "name": "Grapes",
+    //         "value": 19,
+    //     },
+    //     {
+    //         "name": "Lemons",
+    //         "value": 5,
+    //     },
+    //     {
+    //         "name": "Limes",
+    //         "value": 16,
+    //     },
+    //     {
+    //         "name": "Oranges",
+    //         "value": 26,
+    //     },
+    //     {
+    //         "name": "Pears",
+    //         "value": 80,
+    //     }
+    // ];
     console.log(data);
 
     // console.log("Taipei:" + TaipeiCityAllHospital);
-    console.log(TaipeiCityAllHospital);
+    // console.log(TaipeiCityAllHospital);
 
     //sort bars based on value
-    TaipeiCityAllHospital = TaipeiCityAllHospital.sort(function (a, b) {
+    data = data.sort(function (a, b) {
         return d3.ascending(a.value, b.value);
     })
     //set up svg using margin conventions - we'll need plenty of room on the left for labels
@@ -256,7 +265,7 @@ function barchart() {
         top: 15,
         right: 25,
         bottom: 15,
-        left: 60
+        left: 240
     };
 
     var width = 960 - margin.left - margin.right,
@@ -270,14 +279,14 @@ function barchart() {
 
     var x = d3.scale.linear()
         .range([0, width])
-        .domain([0, d3.max(TaipeiCityAllHospital, function (d) {
+        .domain([0, d3.max(data, function (d) {
             return d.value;
         })]);
 
     var y = d3.scale.ordinal()
         .rangeRoundBands([height, 0], .1)
-        .domain(TaipeiCityAllHospital.map(function (d) {
-            return d.hosp;
+        .domain(data.map(function (d) {
+            return d.name;
         }));
 
     //make y axis to show bar names
@@ -292,7 +301,7 @@ function barchart() {
         .call(yAxis)
 
     var bars = svg.selectAll(".bar")
-        .data(TaipeiCityAllHospital)
+        .data(data)
         .enter()
         .append("g")
 
@@ -300,7 +309,7 @@ function barchart() {
     bars.append("rect")
         .attr("class", "bar")
         .attr("y", function (d) {
-            return y(d.hosp);
+            return y(d.name);
         })
         .attr("height", y.rangeBand())
         .attr("x", 0)
@@ -313,7 +322,7 @@ function barchart() {
         .attr("class", "label")
         //y position of the label is halfway down the bar
         .attr("y", function (d) {
-            return y(d.hosp) + y.rangeBand() / 2 + 4;
+            return y(d.name) + y.rangeBand() / 2 + 4;
         })
         //x position is 3 pixels to the right of the bar
         .attr("x", function (d) {
@@ -332,98 +341,221 @@ $('#countyCitySelect').change(function () {
     // console.log(typeof (selectItemValue));
     switch (selectItemValue) {
         case "連江縣":
-            //console.log("enter");
+            console.log(LianjiangCountyAllHospital);
+            var data = [];
+            barchart(data);
             break;
         case "金門縣":
-            //console.log("enter");
+            console.log(KinmenCountyAllHospital);
+            var data = [];
+            barchart(data);
             break;
         case "宜蘭縣":
-            //console.log("enter")
+            console.log(YilanCountyAllHospital);
+            var data = [{
+                "name": "財團法人羅許基金會羅東博愛醫院",
+                "value": 0
+            }]
+            barchart(data);
             break;
         case "彰化縣":
-            //console.log("enter");
+            console.log(ChanghuaCountyAllHospital);
+            var data = [{
+                "name": "秀傳醫療社團法人秀傳紀念醫院",
+                "value": 25
+            }, {
+                "name": "彰化秀傳紀念醫院",
+                "value": 25
+            }]
+            barchart(data);
             break;
         case "南投縣":
-            //console.log("enter");
+            console.log(NantouCountyAllHospital);
+            var data = [];
+            barchart(data);
             break;
         case "雲林縣":
-            //console.log("enter");
+            console.log(YunlinCountyAllHospital);
+            var data = [{
+                "name": "國立臺灣大學醫學院附設醫院雲林分院",
+                "value": 0
+            }, {
+                "name": "天主教若瑟醫療財團法人若瑟醫院",
+                "value": 0
+            }]
+            barchart(data);
             break;
         case "屏東縣":
-            //console.log("enter");
+            console.log(PingtungCountyAllHospital);
+            var data = [{
+                "name": "屏基醫療財團法人屏東基督教醫院",
+                "value": 25
+            }]
+            barchart(data);
             break;
         case "台東縣":
-            //console.log("enter");
+            console.log(TaitungCountyAllHospital);
+            var data = [{
+                "name": "衛生福利部臺東醫院",
+                "value": 100
+            }]
+            barchart(data);
             break;
         case "花蓮縣":
-            //console.log("enter");
+            console.log(HualienCountyAllHospital);
+            var data = [{
+                "name": "臺灣基督教門諾會醫療財團法人門諾醫院",
+                "value": 36
+            }]
+            barchart(data);
             break;
         case "澎湖縣":
-            //console.log("enter");
+            console.log(PenghuCountyAllHospital);
+            var data = [];
+            barchart(data);
             break;
         case "基隆市":
-            //console.log("enter");
+            console.log(KeelungCityAllHospital);
+            var data = [];
+            barchart(data);
             break;
         case "新竹市":
-            //console.log("enter");
+            console.log(HsinchuCityAllHospital);
+            var data = [{
+                "name": "國立臺灣大學醫學院附設醫院新竹分院",
+                "value": 71
+            }]
+            barchart(data);
             break;
         case "臺北市":
-            console.log("enter");
-            // var data = [{
-            //         x: 1,
-            //         w: Math.floor(Math.random() * 200)
-            //     },
-            //     {
-            //         x: 2,
-            //         w: Math.floor(Math.random() * 200)
-            //     },
-            //     {
-            //         x: 3,
-            //         w: Math.floor(Math.random() * 200)
-            //     },
-            //     {
-            //         x: 4,
-            //         w: Math.floor(Math.random() * 200)
-            //     },
-            //     {
-            //         x: 5,
-            //         w: Math.floor(Math.random() * 200)
-            //     },
-            // ];
-
-            var s = d3.select('#barchart')
-                .append('svg')
-                .attr({
-                    'width': 300,
-                    'height': 300
-                });
+            console.log(TaipeiCityAllHospital);
+            // console.log("enter");
+            var data = [{
+                    "name": "國立臺灣大學醫學院附設醫院",
+                    "value": 80,
+                },
+                {
+                    "name": "三軍總醫院",
+                    "value": 44,
+                },
+                {
+                    "name": "臺北榮民總醫院",
+                    "value": 100,
+                },
+                {
+                    "name": "馬偕紀念醫院",
+                    "value": 0,
+                },
+                {
+                    "name": "新光吳火獅紀念醫院",
+                    "value": 100,
+                },
+                {
+                    "name": "基督復臨安息日會醫療財團法人臺安醫院",
+                    "value": 33,
+                },
+                {
+                    "name": "三軍總醫院松山分院附設民眾診療服務處",
+                    "value": 0,
+                }
+            ];
+            barchart(data);
             break;
         case "新北市":
-            //console.log("enter");
+            console.log(NewTaipeiCityAllHospital);
+            var data = [{
+                    "name": "行天宮醫療志業醫療財團法人恩主公醫院",
+                    "value": 50
+                },
+                {
+                    "name": "衛生福利部臺北醫院",
+                    "value": 0
+                },
+                {
+                    "name": "衛生福利部雙和醫院",
+                    "value": 100
+                }
+            ];
+            barchart(data);
             break;
-        case "台中市":
-            //console.log("enter");
+        case "臺中市":
+            console.log(TaichungCityAllHospital);
+            var data = [{
+                "name": "童綜合醫院",
+                "value": 50
+            }, {
+                "name": "佛教慈濟綜合醫院臺中分院",
+                "value": 0
+            }, {
+                "name": "國軍臺中總醫院附設民眾診療服務處",
+                "value": 100
+            }, {
+                "name": "光田醫療社團法人光田綜合醫院",
+                "value": 50
+            }, {
+                "name": "仁愛醫療財團法人台中仁愛醫院",
+                "value": 0
+            }, {
+                "name": "衛生福利部臺中醫院",
+                "value": 100
+            }, {
+                "name": "林新醫療社團法人林新醫院",
+                "value": 0
+            }]
+            barchart(data);
             break;
-        case "台南市":
-            //console.log("enter");
+        case "臺南市":
+            console.log(TainanCityAllHospital);
+            var data = [{
+                "name": "奇美醫院",
+                "value": 67
+            }, {
+                "name": "郭綜合醫院",
+                "value": 50
+            }]
+            barchart(data);
             break;
         case "桃園市":
-            //console.log("enter");
+            console.log(TaoyuanCityAllHospital);
+            var data = [{
+                "name": "敏盛綜合醫院經國總院",
+                "value": 0
+            }]
+            barchart(data);
             break;
         case "苗栗縣":
-            //console.log("enter");
+            console.log(MiaoliCountyAllHospital);
+            var data = [];
+            barchart(data);
             break;
         case "新竹縣":
-            //console.log("enter");
+            console.log(HsinchuCountyAllHospital);
+            var data = [{
+                "name": "東元醫療社團法人東元綜合醫院",
+                "value": 50
+            }]
+            barchart(data);
             break;
         case "嘉義市":
-            //console.log("enter");
+            console.log(ChiayiCityAllHospital);
+            var data = [{
+                "name": "戴德森醫療財團法人嘉義基督教醫院",
+                "value": 80
+            }]
+            barchart(data);
             break;
         case "嘉義縣":
-            //console.log("enter");
+            console.log(ChiayiCountyAllHospital);
+            var data = [];
+            barchart(data);
             break;
         case "高雄市":
-            //console.log("enter");
+            console.log(KaohsiungCityAllHospital);
+            var data = [{
+                "name": "高雄醫學大學附設中和紀念醫院",
+                "value": 73
+            }]
+            barchart(data);
             break;
         default:
             break;
@@ -432,7 +564,6 @@ $('#countyCitySelect').change(function () {
 
 function start() {
     readJsonFile();
-    barchart();
 }
 
 window.addEventListener("load", start, false);
