@@ -19,6 +19,9 @@
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <!-- css file -->
     <link rel="stylesheet" href="./dashboard.css">
+    <!-- canvas js -->
+    <script src="./canvasjs.min.js"></script>
+    <script src="./jquery.canvasjs.min.js"></script>
     <!-- hospital bed json -->
     <script type="text/javascript" src="./data.json"></script>
 </head>
@@ -54,7 +57,7 @@
     <form>
       <div class="form-group">
         <label for="countyCitySelect">Select county or city</label>
-        <select multiple class="form-control"  id="countyCitySelect">
+        <select multiple class="form-control" style="height:fit-content; width:min-content;" id="countyCitySelect">
         <option value="臺北市">臺北市</option>
         <option value="基隆市">基隆市</option>
         <option value="新北市">新北市</option>  
@@ -81,12 +84,10 @@
     </div>
   </form>
 </div>
-<div class="col-xl" id="barchart">
-</div>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
 </div>
 </div>
 <div id="hospitalInfo">
-  
 </div>
 
 <script src="./dashboard.js"></script>
